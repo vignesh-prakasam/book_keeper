@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invoice_number: MyString
+  uuid: 
+  currency: MyString
+  tax: MyString
+  amount_paid: MyString
+  sub_total: MyString
+  date: MyString
+  due_date: MyString
+  discount: MyString
+  notes: MyString
+
+two:
+  invoice_number: MyString
+  uuid: 
+  currency: MyString
+  tax: MyString
+  amount_paid: MyString
+  sub_total: MyString
+  date: MyString
+  due_date: MyString
+  discount: MyString
+  notes: MyString

@@ -1,0 +1,423 @@
+/** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
+._jsPlumb_drag_select * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+
+
+.flowchart {
+  position: relative;
+
+  background:none;
+  width:100%;
+  height:100%;
+  overflow:auto;
+
+}
+
+
+ .flowchart .window {
+    background-color:#999898;
+    box-shadow: 2px 2px 19px #e0e0e0;
+    -o-box-shadow: 2px 2px 19px #e0e0e0;
+    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-border-radius:0.5em;
+    width:5em; height:5em;        
+    position:absolute;  
+    border-radius:3px;
+    color:black;
+    width:60px; 
+    height:60px;
+    -webkit-transition: -webkit-box-shadow 0.15s ease-in;
+    -moz-transition: -moz-box-shadow 0.15s ease-in;
+    -o-transition: -o-box-shadow 0.15s ease-in;
+    transition: box-shadow 0.15s ease-in;
+}
+
+.flowchart .window:hover{
+
+    box-shadow: 2px 2px 19px #444;
+   -o-box-shadow: 2px 2px 19px #444;
+   -webkit-box-shadow: 2px 2px 19px #444;
+   -moz-box-shadow: 2px 2px 19px #444;
+  filter:alpha(opacity=60);
+}
+
+.flowchart .window .selected {
+  color:#67656a !important;
+}
+
+.flowchart .window .title{
+  color:black;
+  font-size:16px;
+  background-color:white;
+}
+.flowchart .window .content{
+  font-size:12px;
+  background-color:white;
+
+}
+
+.flowchart .window, .label {
+  text-align:center;
+  z-index:24;
+  cursor:pointer;
+  box-shadow: 2px 2px 19px #aaa;
+  -o-box-shadow: 2px 2px 19px #aaa;
+  -webkit-box-shadow: 2px 2px 19px #aaa;
+  -moz-box-shadow: 2px 2px 19px #aaa;
+}
+
+.flowchart .window.start{
+  width:120px;
+  height:33px;
+  opacity:0.8;
+    border-color:#45b978 !important;
+
+    box-shadow: 2px 2px 19px #aaa;
+   -o-box-shadow: 2px 2px 19px #aaa;
+   -webkit-box-shadow: 2px 2px 19px #aaa;
+   -moz-box-shadow: 2px 2px 19px #aaa;
+   text-align:center;
+    position:absolute;
+    background-color:#d8dad5;
+  color:black;
+    border:5px solid;
+
+}
+
+.flowchart .window.start .title{
+  color:white;
+  font-size:16px;
+
+  background-color:#45b978;
+}
+
+.flowchart .window.end{
+  width:120px;
+  height:33px;
+  opacity:0.8;
+    border-color:#ef5373 !important;
+
+    box-shadow: 2px 2px 19px #aaa;
+   -o-box-shadow: 2px 2px 19px #aaa;
+   -webkit-box-shadow: 2px 2px 19px #aaa;
+   -moz-box-shadow: 2px 2px 19px #aaa;
+   text-align:center;
+    position:absolute;
+    background-color:#ef5373;
+  color:black;
+    border:5px solid;
+}
+
+.flowchart .window.end .title{
+  color:white;
+  font-size:16px;
+
+  background-color:#ef5373;
+}
+
+
+
+
+
+
+
+.flowchart .window.conditional{
+  width:120px;
+  height:82px;
+  opacity:0.8;
+  border-color:#45b978 !important;
+
+    box-shadow: 2px 2px 19px #aaa;
+   -o-box-shadow: 2px 2px 19px #aaa;
+   -webkit-box-shadow: 2px 2px 19px #aaa;
+   -moz-box-shadow: 2px 2px 19px #aaa;
+   text-align:center;
+    position:absolute;
+    background-color:#ffffff;
+  color:black;
+    border:2px solid;
+
+}
+
+.flowchart .window.conditional .title{
+  color:white;
+  font-size:16px;
+  background-color:#45b978;
+}
+.flowchart .window.conditional .content{
+  font-size:12px;
+  background-color:#ffffff;
+
+}
+
+
+
+
+
+
+
+
+.flowchart .active {
+	border:1px dotted green;
+}
+.flowchart .hover {
+	border:1px dotted red;
+}
+
+#flowchartWindow1 { top:20em;left:2em;}
+#flowchartWindow2 { top:20em; left:60em;}
+
+.flowchart ._jsPlumb_connector { z-index:4; }
+.flowchart ._jsPlumb_endpoint, .endpointTargetLabel, .endpointSourceLabel{ z-index:21;cursor:pointer; }
+
+.flowchart .aLabel {
+ 	background-color:#99d9e8; 
+	padding:3px; 
+	font:12px sans-serif; 
+	color:#444;
+	z-index:21;
+	border:2px solid #0061a4;
+  border-radius:3px;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	cursor: pointer;
+}
+.flowchart .aLabel._jsPlumb_hover {
+	background-color:#5C96BC;
+	color:white;	
+	border:1px solid white;
+}
+
+.flowchart .window.selected{
+	outline:3px solid #99d9e8;
+	outline-offset:0px;
+  opacity:1;
+}
+
+
+
+
+
+
+.flowchart-sidebar{
+  width:350px;
+  height:100%;
+  background:white;
+  z-index: 9999;
+  border:1px solid #d8dad5;
+  border-left:none;
+  position:relative;
+  float:right;
+}
+
+
+.hidden{
+  display:none;
+}
+.flowchart-sidebar textarea{
+  height:30px;
+}
+
+.flowchart-sidebar .form-pane .sidebar-title{
+  margin-top:0;
+  padding:20px;
+  background-color:#d8dad5;
+  color:black;
+
+}
+
+.flowchart-sidebar .form-pane .sidebar-title small{
+  font-size:16px;
+  color:white;
+
+}
+
+.flowchart-sidebar, .flowchart-sidebar > .col-xs-12{
+  height:100%;
+}
+.flowchart-sidebar .form-pane{
+    overflow:auto;
+    padding:0;
+    border:5px solid #d8dad5;
+    height:100%;
+
+}
+.flowchart-sidebar .form-pane .content{
+  margin-top:0;
+  padding:20px;
+  background-color:#ffffff;
+  overflow:scroll;
+
+
+}
+
+
+
+.flowchart-sidebar.conditional .form-pane{
+    padding:0;
+    border-color:#45b978;
+
+}
+.flowchart-sidebar.conditional .form-pane .sidebar-title{
+  margin-top:0;
+  padding:20px;
+  background-color:#45b978;
+  color:white;
+
+}
+
+.flowchart-sidebar .form-pane .actions .well{
+padding:0;
+
+}
+
+
+.flowchart-sidebar .form-pane .action{
+  margin-top:0;
+  padding-top:10px;
+
+}
+
+.flowchart-sidebar .form-pane .action .hr{
+  border-color:#e3e3e3;
+  margin:0;
+
+}
+
+.flowchart-sidebar .form-pane .truefalse{
+position:absolute;
+left:0;
+top:0;
+
+}
+
+
+
+
+
+
+
+.flowchart-sidebar.start .form-pane{
+    padding:0;
+    border-color:#45b978;
+
+}
+.flowchart-sidebar.start .form-pane .sidebar-title{
+  margin-top:0;
+  padding:20px;
+  background-color:#45b978;
+  color:white;
+
+}
+
+.flowchart-sidebar.start .form-pane .content{
+  margin-top:0;
+  padding:20px;
+  background-color:#ffffff;
+
+}
+
+
+#main .action-label{
+margin:3px;
+border:1px dotted #6ec3e7;
+background-color:#ffffff;
+padding:3px;
+}
+
+
+
+
+
+
+.flowchart-sidebar.end .form-pane{
+    padding:0;
+    border-color:#ef5373;
+
+}
+.flowchart-sidebar.end .form-pane .sidebar-title{
+  margin-top:0;
+  padding:20px;
+  background-color:#ef5373;
+  color:white;
+
+}
+
+.flowchart-sidebar.end .form-pane .content{
+  margin-top:0;
+  padding:20px;
+  background-color:#ffffff;
+
+}
+
+
+
+
+path, ._jsPlumb_endpoint { cursor:pointer; }
+
+.cmd { 
+  color:white;
+  margin-right:25px;
+}
+
+.cmd:hover { 
+  color:#FF2300;
+  text-decoration: underline;
+}
+.cmd:active {
+  color:#FF2300;
+}
+
+.label {
+  font-size:13px; 
+
+}
+
+.component { 
+  border:1px solid #346789; 
+  border-radius:0.5em;        
+  opacity:0.8; 
+  filter:alpha(opacity=80);
+  background-color:white;
+  color:black;
+  padding:0.5em;   
+  font-size:0.8em;
+}
+
+.component:hover {
+    border:1px solid #123456;
+    box-shadow: 2px 2px 19px #444;
+   -o-box-shadow: 2px 2px 19px #444;
+   -webkit-box-shadow: 2px 2px 19px #444;
+   -moz-box-shadow: 2px 2px 19px #fff;
+    opacity:0.9;
+    filter:alpha(opacity=90);
+}
+
+/** Z-INDEX **/
+
+._jsPlumb_connector { z-index:18; }
+._jsPlumb_endpoint { z-index:19; }
+._jsPlumb_overlay { z-index:20; }
+/*
+._jsPlumb_connector._jsPlumb_hover {
+    z-index:21 !important;
+}
+._jsPlumb_endpoint._jsPlumb_hover {
+    z-index:22 !important;
+}
+._jsPlumb_overlay._jsPlumb_hover {
+    z-index:23 !important;
+}
+*/
+
+
+
