@@ -1,3 +1,4 @@
+<div ng-controller="InvoiceCtrl">
 <%= form_for(@invoice) do |f| %>
   <% if @invoice.errors.any? %>
     <div id="error_explanation">
@@ -13,22 +14,26 @@
 
   <div class="field">
     <%= f.label :invoice_number %><br>
-    <%= f.text_field :invoice_number %>
+    <%= f.text_field :invoice_number , "ng-model" => "invoice_number"%>
   </div>
+
+
   <div class="field">
-    <%= f.label :uuid %><br>
-    <%= f.text_field :uuid %>
-  </div>
-  <div class="field">
-    <%= f.label :currency %><br>
-    <%= f.text_field :currency %>
+    <!--<select name="currency" id="currency" >-->
+      <!--<option ng-repeat="currency in currencies" value="{{ currency.name }}"> {{currency.name}} {{currency.symbol}}</option>-->
+    <!--</select>-->
+    <select ng-model="currency" ng-options="currency as currency for currency in currencies"></select>
+    <!--<ul>-->
+      <!--<li ng-repeat="currency in currencies">{{currency.name}}</li>-->
+    <!--</ul>-->
   </div>
   <div class="field">
     <%= f.label :tax %><br>
     <%= f.text_field :tax %>
   </div>
   <div class="field">
-    <%= f.label :amount_paid %><br>
+    <%= f.label :amount_paid %> {{currency}}<br>
+
     <%= f.text_field :amount_paid %>
   </div>
   <div class="field">
@@ -55,3 +60,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+</div>
