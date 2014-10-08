@@ -1,4 +1,5 @@
-<div ng-controller="InvoiceCtrl">
+<div ng-controller="InvoiceCtrl" class="row">
+  <div class="large-8 columns ">
 <%= form_for(@invoice) do |f| %>
   <% if @invoice.errors.any? %>
     <div id="error_explanation">
@@ -12,52 +13,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :invoice_number %><br>
+  <div class="row">
+    <%= f.label :invoice_number %>
     <%= f.text_field :invoice_number , "ng-model" => "invoice_number"%>
   </div>
 
 
-  <div class="field">
-    <!--<select name="currency" id="currency" >-->
-      <!--<option ng-repeat="currency in currencies" value="{{ currency.name }}"> {{currency.name}} {{currency.symbol}}</option>-->
-    <!--</select>-->
-    <select ng-model="currency" ng-options="currency as currency for currency in currencies"></select>
-    <!--<ul>-->
-      <!--<li ng-repeat="currency in currencies">{{currency.name}}</li>-->
-    <!--</ul>-->
-  </div>
-  <div class="field">
-    <%= f.label :tax %><br>
+  <div class="row">
+    <%= f.label :tax %>
     <%= f.text_field :tax %>
   </div>
-  <div class="field">
-    <%= f.label :amount_paid %> {{currency}}<br>
+  <div class="row">
 
-    <%= f.text_field :amount_paid %>
+    <div class="small-4 columns ">
+    <%= f.label :amount_paid %>
+    </div>
+
+    <div class="small-2 columns ">{{currency}}</div>
+    <div class="small-6 columns "><%= f.text_field :amount_paid %></div>
   </div>
-  <div class="field">
-    <%= f.label :sub_total %><br>
+  <div class="row">
+    <%= f.label :sub_total %>
     <%= f.text_field :sub_total %>
   </div>
-  <div class="field">
-    <%= f.label :date %><br>
+  <div class="row">
+    <%= f.label :date %>
     <%= f.text_field :date %>
   </div>
-  <div class="field">
-    <%= f.label :due_date %><br>
+  <div class="row">
+    <%= f.label :due_date %>
     <%= f.text_field :due_date %>
   </div>
-  <div class="field">
-    <%= f.label :discount %><br>
+  <div class="row">
+    <%= f.label :discount %>
     <%= f.text_field :discount %>
   </div>
-  <div class="field">
-    <%= f.label :notes %><br>
+  <div class="row">
+    <%= f.label :notes %>
     <%= f.text_field :notes %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+  </div>
+  <div class="field large-4 columns right">
+    <%= f.label :currency %>
+    <!--<select name="currency" id="currency" >-->
+    <!--<option ng-repeat="currency in currencies" value="{{ currency.name }}"> {{currency.name}} {{currency.symbol}}</option>-->
+    <!--</select>-->
+    <select ng-model="currency" ng-options="currency as currency for currency in currencies"></select>
+    <!--<ul>-->
+    <!--<li ng-repeat="currency in currencies">{{currency.name}}</li>-->
+    <!--</ul>-->
+  </div>
+        <%end%>
 </div>

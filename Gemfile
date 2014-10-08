@@ -103,7 +103,8 @@ end
 
 gem 'aescrypt'
 
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+#gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets'
 
 group :staging do
 #  gem 'speech2text'
@@ -131,3 +132,9 @@ gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
 gem 'pry'
+
+gem 'foundation-rails'
+gem 'modernizr-rails'
+gem 'rails_layout'
+gem 'angularjs-rails'
+gem 'bower-rails'
