@@ -1,0 +1,70 @@
+<div ng-controller="InvoiceCtrl" class="row">
+  <div class="large-8 columns ">
+<%= form_for(@invoice) do |f| %>
+  <% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <% @invoice.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <%= f.label :invoice_number %>
+    <%= f.text_field :invoice_number , "ng-model" => "invoice_number"%>
+  </div>
+
+
+  <div class="row">
+    <%= f.label :tax %>
+    <%= f.text_field :tax %>
+  </div>
+  <div class="row">
+
+    <div class="small-4 columns ">
+    <%= f.label :amount_paid %>
+    </div>
+
+    <div class="small-2 columns ">{{currency}}</div>
+    <div class="small-6 columns "><%= f.text_field :amount_paid %></div>
+  </div>
+  <div class="row">
+    <%= f.label :sub_total %>
+    <%= f.text_field :sub_total %>
+  </div>
+  <div class="row">
+    <%= f.label :date %>
+    <%= f.text_field :date %>
+  </div>
+  <div class="row">
+    <%= f.label :due_date %>
+    <%= f.text_field :due_date %>
+  </div>
+  <div class="row">
+    <%= f.label :discount %>
+    <%= f.text_field :discount %>
+  </div>
+  <div class="row">
+    <%= f.label :notes %>
+    <%= f.text_field :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  </div>
+  <div class="field large-4 columns right">
+    <%= f.label :currency %>
+    <!--<select name="currency" id="currency" >-->
+    <!--<option ng-repeat="currency in currencies" value="{{ currency.name }}"> {{currency.name}} {{currency.symbol}}</option>-->
+    <!--</select>-->
+    <select ng-model="currency" ng-options="currency as currency for currency in currencies"></select>
+    <!--<ul>-->
+    <!--<li ng-repeat="currency in currencies">{{currency.name}}</li>-->
+    <!--</ul>-->
+  </div>
+        <%end%>
+</div>

@@ -10,11 +10,38 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+    if @invoice
+      @line_items = []
+      @invoice.products.each do |p|
+        line_item = {}
+        line_item[:desc] = p.description
+        line_item[:qty] = p.quantity
+        line_item[:rate] = p.price
+        line_item[:amount] = p.amount
+        @line_items << line_item
+      end
+    end
   end
 
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    @invoice.products << Product.new({description: "hello" , quantity: 1 , price: 0 , amount: 0})
+    #@line_items = []
+    #  line_item = {}
+    #  line_item[:desc] = "jjjjj"
+    #  line_item[:qty] = 1
+    #  line_item[:rate] = 0
+    #  line_item[:amount] = 0
+    #
+    #@line_items << line_item.to_json.html_safe
+    #line_item = {}
+    #line_item[:desc] = "ssss"
+    #line_item[:qty] = 1
+    #line_item[:rate] = 0
+    #line_item[:amount] = 0
+    #
+    #@line_items << line_item.to_json.html_safe
   end
 
   # GET /invoices/1/edit

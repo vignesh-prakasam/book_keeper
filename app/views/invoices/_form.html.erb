@@ -1,70 +1,144 @@
-<div ng-controller="InvoiceCtrl" class="row">
-  <div class="large-8 columns ">
-<%= form_for(@invoice) do |f| %>
-  <% if @invoice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
-
-      <ul>
-      <% @invoice.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="row">
-    <%= f.label :invoice_number %>
-    <%= f.text_field :invoice_number , "ng-model" => "invoice_number"%>
-  </div>
+<%= simple_form_for(@invoice) do |f| %>
+<div class="row" ng-controller="InvoiceCtrl" >
 
 
-  <div class="row">
-    <%= f.label :tax %>
-    <%= f.text_field :tax %>
-  </div>
-  <div class="row">
+  <div class="large-8 columns" style="border: 1px solid #dddddd;" >
 
-    <div class="small-4 columns ">
-    <%= f.label :amount_paid %>
+    <div class="row">
+      <div class="panel radius text-center" style="margin:10px;height: 50px;">
+        <h4>Invoice</h4>
+      </div>
     </div>
 
-    <div class="small-2 columns ">{{currency}}</div>
-    <div class="small-6 columns "><%= f.text_field :amount_paid %></div>
+    <div class="row">
+      <div class="large-6 columns">
+        <!--<input type="text" name="invoice_from" placeholder="Invoice from?" id="invoice_from"/>-->
+        <div class="row">
+          <div class="large-12 columns">
+            <textarea name="invoice_from" placeholder="Invoice from?" class="radius"></textarea>
+          </div>
+          <div class="large-12 columns">
+            <textarea name="invoice_to" placeholder="Invoice to?" class="radius"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="large-6 columns">
+        <div class="row collapse">
+          <div class="large-4 columns">
+            <span class="prefix">Invoice number</span>
+          </div>
+          <div class="large-8 columns">
+            <!--<input type="text" name="invoice_number" class="radius" id="invoice_number"/>-->
+            <%= f.text_field :invoice_number , "ng-model" => "invoice_number" , :class=> "radius"%>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="large-4 columns">
+            <span class="prefix">Date</span>
+          </div>
+          <div class="large-8 columns">
+            <%= f.text_field :date , :class=> "radius" %>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="large-4 columns">
+            <span class="prefix">Due date</span>
+          </div>
+          <div class="large-8 columns">
+            <%= f.text_field :due_date , :class=> "radius"%>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!--items start-->
+    <div class="row">
+      <div class="large-12 columns">
+        <table ng-init="line_items = <%= @invoice.products %>">
+          <thead>
+          <tr>
+            <th width="5%"></th>
+            <th width="50%">Description</th>
+            <th width="10%">Quantity</th>
+            <th width="15%">Rate</th>
+            <th width ="20%">Amount</th>
+          </tr>
+          </thead>
+          <%#= render :partial => 'line_items' %>
+          <tr ng-repeat="line_item in line_items">
+            <td><a ng-click="removeRow($index)" class="button alert tiny radius" href="javascript:void(0); ">Remove</a></td>
+            <td><input type="text" name="description" placeholder="description" id="description"  value="{{ line_item.products }}"/></td>
+            <td><input type="text" name="quantity" id="quantity" value="{{ line_item.quantity }}"/></td>
+            <td><input type="text" name="rate" id="rate" value="{{ line_item.price }}"/></td>
+            <td><input type="text" name="amount" id="amount" value="{{ line_item.amount }}" /></td>
+          </tr>
+        </table>
+        <a ng-click="addRow()" class="button success tiny radius" href="javascript:void(0);">Add row</a>
+      </div>
+    </div>
+    <!--items end-->
+
+    <!--summary starts-->
+    <div class="row">
+      <div class="large-6 columns"></div>
+      <div class="large-6 columns">
+        <div class="row collapse">
+          <div class="large-6 columns"><span class="prefix">SubTotal</span></div>
+          <div class="large-6 columns"><input type="text" name="subtotal" id="subtotal"/></div>
+        </div>
+        <div class="row collapse">
+          <div class="large-6 columns"><span class="prefix">Tax</span></div>
+          <div class="large-6 columns"><input type="text" name="subtotal" id="tax"/></div>
+        </div>
+        <div class="row collapse">
+          <div class="large-6 columns"><span class="prefix">Amount Paid</span></div>
+          <div class="large-6 columns"><input type="text" name="subtotal" id="amount_paid"/></div>
+        </div>
+        <div class="row collapse">
+          <div class="large-6 columns"><span class="prefix">Balance</span></div>
+          <div class="large-6 columns"><input type="text" name="subtotal" id="balance"/></div>
+        </div>
+      </div>
+    </div>
+    <!--summary ends-->
+
   </div>
-  <div class="row">
-    <%= f.label :sub_total %>
-    <%= f.text_field :sub_total %>
+
+
+  <!--sidebar-->
+  <div class="large-4 columns">
+    <div class="row">
+      <div class="large-12 columns"><a class="button success radius expand" href="">Download</a></div>
+      <div class="large-12 columns"><a class="button success radius expand" href="">Send invoice</a></div>
+      <div class="large-12 columns">
+        <fieldset>
+          <legend>Currency</legend>
+          <select>
+            <option value="USD">USD</option>
+            <option value="Euro">Euro</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>Tax</legend>
+          <select>
+            <option value="percentage">% Tax</option>
+            <option value="flat">Flat</option>
+            <option value="off">Off</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>Discount</legend>
+          <select>
+            <option value="on">On</option>
+            <option value="off">Off</option>
+          </select>
+        </fieldset>
+      </div>
+    </div>
   </div>
-  <div class="row">
-    <%= f.label :date %>
-    <%= f.text_field :date %>
-  </div>
-  <div class="row">
-    <%= f.label :due_date %>
-    <%= f.text_field :due_date %>
-  </div>
-  <div class="row">
-    <%= f.label :discount %>
-    <%= f.text_field :discount %>
-  </div>
-  <div class="row">
-    <%= f.label :notes %>
-    <%= f.text_field :notes %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  </div>
-  <div class="field large-4 columns right">
-    <%= f.label :currency %>
-    <!--<select name="currency" id="currency" >-->
-    <!--<option ng-repeat="currency in currencies" value="{{ currency.name }}"> {{currency.name}} {{currency.symbol}}</option>-->
-    <!--</select>-->
-    <select ng-model="currency" ng-options="currency as currency for currency in currencies"></select>
-    <!--<ul>-->
-    <!--<li ng-repeat="currency in currencies">{{currency.name}}</li>-->
-    <!--</ul>-->
-  </div>
-        <%end%>
 </div>
+<% end %>
