@@ -27,21 +27,6 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
     @invoice.products << Product.new({description: "hello" , quantity: 1 , price: 0 , amount: 0})
-    #@line_items = []
-    #  line_item = {}
-    #  line_item[:desc] = "jjjjj"
-    #  line_item[:qty] = 1
-    #  line_item[:rate] = 0
-    #  line_item[:amount] = 0
-    #
-    #@line_items << line_item.to_json.html_safe
-    #line_item = {}
-    #line_item[:desc] = "ssss"
-    #line_item[:qty] = 1
-    #line_item[:rate] = 0
-    #line_item[:amount] = 0
-    #
-    #@line_items << line_item.to_json.html_safe
   end
 
   # GET /invoices/1/edit
@@ -96,6 +81,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:invoice_number, :uuid, :currency, :tax, :amount_paid, :sub_total, :date, :due_date, :discount, :notes)
+      params.require(:invoice).permit(:id, :invoice_number, :uuid, :currency, :tax, :amount_paid, :sub_total, :date, :due_date, :discount, :notes ,products_attributes: [:product_id , :id, :description , :quantity ,:price , :amount , :_destroy])
     end
 end

@@ -5,6 +5,17 @@ app.controller("InvoiceCtrl",function($scope){
     $scope.currencies = ["Rs" , "USD" , "EU"] ;
     $scope.line_items = []
 
+
+    $scope.initRows = function(rows){
+        rows = JSON.parse(rows);
+        for(var i=0; i < rows.length ; i++)
+        {
+            $scope.line_items.push(rows[i]);
+        }
+
+    };
+
+
     $scope.addRow = function(){
 
         $scope.line_items.push({description: "hello" , quantity: 1 , price: 0 , amount: 0});
@@ -12,8 +23,14 @@ app.controller("InvoiceCtrl",function($scope){
     };
 
     $scope.removeRow = function(index){
-            $scope.line_items.splice(index, 1);
+            $scope.line_items[index]["class"] = "hide" ;
+            $scope.line_items[index]["_destroy"] = true ;
+            //$scope.line_items.splice(index, 1);
     };
+
+    $scope.calculateAmount = function(index){
+        $scope.line_items[index]["amount"] = $scope.line_items[index]["price"] * $scope.line_items[index]["quantity"] ;
+    }
 });
 
 
